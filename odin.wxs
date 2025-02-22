@@ -1,0 +1,81 @@
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="B99937CA-80B9-482D-87BA-A6838587A3EF" UpgradeCode="D8DC8D98-8539-4186-8F58-1302DCBAFB0C" Name="Odin" Version="3.14.4" Manufacturer="Samsung" Language="1033">
+    <Package InstallerVersion="405" InstallScope="perMachine" InstallPrivileges="elevated" Compressed="yes" Manufacturer="Samsung" />
+    <Media Cabinet="media1.cab" Id="1" EmbedCab="yes" />
+    <Icon Id="MyIcon" SourceFile="Icon4.ico" />
+    <WixVariable Id="WixUIDialogBmp" Value="Odinwizard\wizard.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="Odinwizard\header.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="ODIN TERMS OF SERVICE.rtf" />
+    <Property Id="ARPPRODUCTICON" Value="MyIcon" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="MenuAppFolder" Name="TheAppName" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MyAppFolder" Name="Odin" />
+      </Directory>
+    </Directory>
+    <ComponentGroup Id="RemoveFolders">
+      <ComponentRef Id="Remove.MenuAppFolder" />
+      <ComponentRef Id="Remove.ProgramFilesFolder" />
+    </ComponentGroup>
+    <ComponentGroup Id="Odin">
+      <ComponentRef Id="CId2AE7DF9D" />
+      <ComponentRef Id="CIdC0E46992" />
+      <ComponentRef Id="CId147ED36B" />
+      <ComponentRef Id="CSCIdD042B53F" />
+      <ComponentRef Id="CSCId6D2B00A3" />
+      <ComponentRef Id="CIdA1EBDFF3" />
+    </ComponentGroup>
+    <Feature Id="ProductFeature" Title="Odin">
+      <ComponentGroupRef Id="RemoveFolders" />
+      <ComponentGroupRef Id="Odin" />
+    </Feature>
+    <UIRef Id="WixUI_FeatureTree" />
+    <DirectoryRef Id="ProgramFilesFolder">
+      <Component Id="Remove.ProgramFilesFolder" Guid="5023923E-1475-4E74-912B-08FC28250018">
+        <RemoveFolder Id="ProgramFilesFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MyAppFolder">
+      <Component Id="CIdA1EBDFF3" Guid="2D5E4BC7-64AA-4DA7-8086-C6EF17CAA6B5" Win64="no">
+        <File Id="FId6A0E21D5" Name="Odin3_v3.14.4.exe" Source="C:\Users\zohan\Downloads\Odin3-v3.14.4\Odin3_v3.14.4\" />
+        <CreateFolder />
+      </Component>
+      <Component Id="CId147ED36B" Guid="BEB79261-7578-486D-993B-C8CC1FF4C2C1" Win64="no">
+        <File Id="FIdD47767C6" Name="cpprest141_2_10.dll" Source="C:\Users\zohan\Downloads\Odin3-v3.14.4\Odin3_v3.14.4\" />
+        <CreateFolder />
+      </Component>
+      <Component Id="CIdC0E46992" Guid="8AE5230A-3808-4C05-82D8-E82CB0829B23" Win64="no">
+        <File Id="FId67FFD621" Name="Odin3.ini" Source="C:\Users\zohan\Downloads\Odin3-v3.14.4\Odin3_v3.14.4\" />
+        <CreateFolder />
+      </Component>
+      <Component Id="CId2AE7DF9D" Guid="D21A4579-2472-44C1-9958-6F8F9AABA39D" Win64="no">
+        <File Id="FId96848D4E" Name="SS_DL.dll" Source="C:\Users\zohan\Downloads\Odin3-v3.14.4\Odin3_v3.14.4\" />
+        <CreateFolder />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="ProgramMenuFolder">
+      <Component Id="CSCIdD042B53F" Guid="41024036-7C46-434A-A36F-960CADC2DC15">
+        <Shortcut Id="SIdBE638B8E" Name="Odin v3.14.4" Target="[!FId6A0E21D5]" WorkingDirectory="MyAppFolder" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCIdD042B53F" Directory="ProgramMenuFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MenuAppFolder">
+      <Component Id="Remove.MenuAppFolder" Guid="90D00B5F-BFEE-493F-91E5-6FA5FB601851">
+        <RemoveFolder Id="MenuAppFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="CSCId6D2B00A3" Guid="6DF905B3-F326-40E1-9A0D-804C28666851">
+        <Shortcut Id="SId2DD125BC" Name="Odin v3.14.4" Description="Phone tool" Target="[!FId6A0E21D5]" WorkingDirectory="MyAppFolder" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCId6D2B00A3" Directory="DesktopFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+  </Product>
+</Wix>
